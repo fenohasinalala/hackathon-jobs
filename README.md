@@ -7,5 +7,5 @@
 
 # Model MLD
 <p align="left">
-  <img src="https://github.com/Herizoran/hackaton-jobs/blob/main/img/jobOffer_mld.jpg" />
+  <img src="https://github.com/Herizoran/hackathon-jobs/blob/main/img/jobOffer_mld.jpg" />
 </p>
