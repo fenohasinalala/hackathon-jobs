@@ -1,6 +1,5 @@
 package com.hackathon.jobs.controller.mapper;
 
-import com.hackathon.jobs.model.Leave;
 import org.springframework.stereotype.Component;
 
 @Component
