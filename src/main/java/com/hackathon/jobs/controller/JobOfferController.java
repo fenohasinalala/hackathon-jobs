@@ -35,10 +35,12 @@ public class JobOfferController {
     public JobOffer getWorkerById(@PathVariable Long id) throws Exception {
         return jobOfferService.getJobOffersById(id);
     }
-
+    @GetMapping("/job-offers/count")
+    public int getJobOfferCount() {
+        return jobOfferService.getJobOfferCount();
+    }
     @PostMapping("/job-offers")
     public JobOffer postJobOffer(@Valid @RequestBody JobOffer jobOffer){
         return jobOfferService.postJobOffer(jobOffer);
     }
-
 }

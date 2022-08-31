@@ -42,6 +42,11 @@ public class JobOfferService {
         return jobOffer;
     }
 
+    //GET MAPPING JOB OFFERS COUNTS
+    public int getJobOfferCount(){
+        return jobOfferRepository.findAll().size();
+    }
+
     //POST MAPPING
     public JobOffer postJobOffer(JobOffer jobOffer) {
         jobOfferValidator.accept(jobOffer);
@@ -53,5 +58,4 @@ public class JobOfferService {
         jobOfferRepository.save(jobOffer);
         return jobOffer;
     }
-
 }
