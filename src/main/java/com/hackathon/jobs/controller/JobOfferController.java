@@ -1,7 +1,6 @@
 package com.hackathon.jobs.controller;
 
 import com.hackathon.jobs.model.JobOffer;
-import com.hackathon.jobs.model.Worker;
 import com.hackathon.jobs.service.JobOfferService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
