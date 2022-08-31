@@ -55,7 +55,7 @@ public class ApplicationController {
 
     ////////////////////////////////////PUT///////////////////////////////////////////////////////
     @PutMapping("/applications/{id}")
-    public Application putUpdateApllication(
+    public Application putUpdateApplication(
             @PathVariable(name = "id")Long id,
             @RequestBody Application newApplication
     ){
