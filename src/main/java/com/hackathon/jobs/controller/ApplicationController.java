@@ -35,4 +35,12 @@ public class ApplicationController {
     public Application insertApplication(@RequestBody Application newApplication) {
         return applicationService.insertApplication(newApplication);
     }
+
+    @PutMapping("/applications/{id}")
+    public Application putUpdateApllication(
+            @PathVariable(name = "id")Long id,
+            @RequestBody Application newApplication
+    ){
+        return applicationService.putUpdateApplication(id, newApplication);
+    }
 }

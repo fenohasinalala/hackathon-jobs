@@ -57,7 +57,7 @@ public class ApplicationService {
     public Application insertApplication(Application applicationParameter) {
         Application newApplication = new Application();
         JobOffer jobOffer = jobOfferRepository.findById(applicationParameter.getJobOffer().getIdJobOffer())
-            .orElseThrow(()->new ResourceNotFoundException("the job-offer on "+applicationParameter.getJobOffer().getIdJobOffer()));
+                .orElseThrow(()->new ResourceNotFoundException("the job-offer on "+applicationParameter.getJobOffer().getIdJobOffer()));
 
         newApplication.setCandidateName(applicationParameter.getCandidateName());
         newApplication.setDateApplication(applicationParameter.getDateApplication());
