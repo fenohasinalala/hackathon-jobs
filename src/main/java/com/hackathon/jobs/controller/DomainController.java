@@ -24,17 +24,17 @@ public class DomainController {
     @GetMapping("/domains")
     public List<Domain> getDomains(@RequestParam int page,
                                    @RequestParam(value = "page_size") int pageSize,
-                                   @RequestParam(value = "name",required = false , defaultValue = "") String name){
+                                   @RequestParam(value = "name",required = false) String name){
         return domainService.getDomains(page, pageSize, name);
     }
 
     @GetMapping("/domains/{id}")
-    public Domain getWorkerById(@PathVariable Long id) throws Exception {
+    public Domain getDomainById(@PathVariable Long id) throws Exception {
         return domainService.getDomainById(id);
     }
     @PostMapping("/domains")
-    public Domain addWorker(@Valid @RequestBody Domain Domain){
-        return domainService.addDomain(Domain);
+    public Domain postDomain(@Valid @RequestBody Domain Domain){
+        return domainService.postDomain(Domain);
     }
 
     @PutMapping("/domains/{id}")

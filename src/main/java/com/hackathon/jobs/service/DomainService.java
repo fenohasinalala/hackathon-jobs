@@ -35,6 +35,10 @@ public class DomainService {
         }
         Pageable pageable = PageRequest.of(page - 1,pageSize,
                 Sort.by(ASC,"name"));
+        Pageable withoutName = PageRequest.of(page - 1,pageSize);
+        if (name==null){
+            return domainRepository.findAll(withoutName).toList();
+        }
         return domainRepository.findByNameIgnoreCase(name, pageable);
     }
 
@@ -46,7 +50,7 @@ public class DomainService {
     }
 
     //POST MAPPING
-    public Domain addDomain(Domain domain) {
+    public Domain postDomain(Domain domain) {
         domainValidator.accept(domain);
         Optional<Domain> domainByName = domainRepository.findDomainByName(domain.getName());
         if (domainByName.isPresent()){
