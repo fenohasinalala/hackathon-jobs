@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -97,5 +98,27 @@ public class ApplicationService {
         }
         applicationRepository.save(application);
         return application;
+    }
+
+    //GET MAPPING APPLICATION BY DOMAIN ID
+    public List<Application> getApplicationByIdDomain(Long idDomain){
+        List<Application> allApplications = applicationRepository.findAll();
+        List<Application> applicationByDomain = new ArrayList<>();
+        for(Application application : allApplications){
+            if(application.getJobOffer().getDomain().getIdDomain() == idDomain){
+                applicationByDomain.add(application);
+            }
+        }
+        return applicationByDomain;
+    }
+
+    //GET MAPPING APPLICATION COUNT BY DOMAIN ID
+    public int getApplicationCountByDomain(Long idDomain){
+        return this.getApplicationByIdDomain(idDomain).size();
+    }
+
+    //GET MAPPING APPLICATION COUNT
+    public int getApplicationCount(){
+        return applicationRepository.findAll().size();
     }
 }

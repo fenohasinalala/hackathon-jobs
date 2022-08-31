@@ -14,6 +14,7 @@ import java.util.List;
 public class ApplicationController {
     private ApplicationService applicationService;
 
+    ///////////////////////////////////////GET//////////////////////////////////////////////////////////////////
     @GetMapping("/applications")
     public List<Application> getAllApplication(
             @RequestParam(name = "page")int page,
@@ -31,13 +32,30 @@ public class ApplicationController {
         return applicationService.getApplicationById(id);
     }
 
+    @GetMapping("/domains/{id_domain}/applications")
+    public List<Application> getApplicationByDomain(@PathVariable(name = "id_domain")Long idDomain){
+        return applicationService.getApplicationByIdDomain(idDomain);
+    }
+
+    @GetMapping("/applications/count")
+    public int getApplicationCount(){
+        return applicationService.getApplicationCount();
+    }
+
+    @GetMapping("/domains/{id_domain}/applications/count")
+    public int getApplicationCountByDomain(@PathVariable(name = "id_domain")Long idDomain){
+        return applicationService.getApplicationCountByDomain(idDomain);
+    }
+
+    //////////////////////////////////POST///////////////////////////////////////////////////
     @PostMapping("/applications")
     public Application insertApplication(@RequestBody Application newApplication) {
         return applicationService.insertApplication(newApplication);
     }
 
+    ////////////////////////////////////PUT///////////////////////////////////////////////////////
     @PutMapping("/applications/{id}")
-    public Application putUpdateApllication(
+    public Application putUpdateApplication(
             @PathVariable(name = "id")Long id,
             @RequestBody Application newApplication
     ){

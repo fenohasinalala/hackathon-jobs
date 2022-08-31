@@ -1,13 +1,14 @@
 package com.hackathon.jobs.controller;
 
 import com.hackathon.jobs.model.JobOffer;
-import com.hackathon.jobs.model.JobOffer;
 import com.hackathon.jobs.service.JobOfferService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,6 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class JobOfferController {
-
     private JobOfferService jobOfferService;
 
     @GetMapping("/job-offers")
@@ -38,4 +38,24 @@ public class JobOfferController {
         return jobOfferService.putModificationJobOfferById(id, newJobOffer);
     }
 
+    @GetMapping("/job-offers/{id}")
+    public JobOffer getWorkerById(@PathVariable Long id) throws Exception {
+        return jobOfferService.getJobOffersById(id);
+    }
+    @GetMapping("/domains/{id_domain}/job-offers")
+    public List<JobOffer> getJobOfferByDomainId(@PathVariable(name = "id_domain")Long idDomain){
+        return jobOfferService.getJobOfferByIdDomain(idDomain);
+    }
+    @GetMapping("/domains/{id_domain}/job-offers/count")
+    public int getJobOfferCountByDomain(@PathVariable(name = "id_domain")Long idDomain){
+        return jobOfferService.getJobOfferCountByDomainId(idDomain);
+    }
+    @GetMapping("/job-offers/count")
+    public int getJobOfferCount() {
+        return jobOfferService.getJobOfferCount();
+    }
+    @PostMapping("/job-offers")
+    public JobOffer postJobOffer(@Valid @RequestBody JobOffer jobOffer){
+        return jobOfferService.postJobOffer(jobOffer);
+    }
 }
