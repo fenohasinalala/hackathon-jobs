@@ -1,6 +1,7 @@
 package com.hackathon.jobs.service;
 
 import com.hackathon.jobs.exception.BadRequestException;
+import com.hackathon.jobs.exception.ResourceNotFoundException;
 import com.hackathon.jobs.model.Application;
 import com.hackathon.jobs.model.JobOffer;
 import com.hackathon.jobs.model.validation.ApplicationValidator;
@@ -47,13 +48,8 @@ public class ApplicationService {
 
     //GET BY ID
     public Application getApplicationById(Long id) {
-        Application applicationById;
-        Optional<Application> applicationOptional = applicationRepository.findById(id);
-        if(applicationOptional.isPresent()){
-            applicationById = applicationOptional.get();
-        }else {
-            throw new NullPointerException("application not found");
-        }
+        Application applicationById = applicationRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("the application with "+id+" does not exist"));
         return applicationById;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,5 +74,11 @@ public class ApplicationService {
         newApplication.setJobOffer(jobOffer);
         applicationRepository.save(newApplication);
         return newApplication;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //PUT MAPPING
+    public Application putUpdateApplication(Application applicationToUpdate){
+
     }
 }
