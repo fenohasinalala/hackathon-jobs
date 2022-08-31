@@ -1,7 +1,6 @@
 package com.hackathon.jobs.repository;
 
 import com.hackathon.jobs.model.JobOffer;
-import com.hackathon.jobs.model.Worker;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,8 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
-
-
     List<JobOffer> findByReferenceContainingIgnoreCaseAndPostContainingIgnoreCaseAndProfileContainingIgnoreCaseAndLocationContainingIgnoreCaseAndDescriptionContainingIgnoreCase(
             Pageable pageable,
             String reference,
@@ -23,6 +20,7 @@ public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
             String description);
 
     Optional<JobOffer> findByReference(String reference);
+    Optional<JobOffer> findByReferenceIgnoreCase(String reference);
 
     /*
     Optional<JobOffer> findByPostIgnoreCase(String post);
@@ -32,7 +30,6 @@ public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     Optional<JobOffer> findByCompanyIgnoreCase(String company);
     Optional<JobOffer> findByAvailable(Boolean available);
     Optional<JobOffer> findByDomainIdDomain(Long idDomain);
-
      */
     Optional<JobOffer> findByAvailable(Boolean available);
 }

@@ -31,32 +31,7 @@ import static org.springframework.data.domain.Sort.Direction.ASC;
 public class JobOfferService {
     JobOfferRepository jobOfferRepository;
     JobOfferValidator jobOfferValidator;
-
     DomainRepository domainRepository;
-
-    @Transactional
-    public JobOffer putModificationJobOfferById(Long id, JobOffer newJobOffer) {
-        JobOffer JobOffer = jobOfferRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Job Offer with id "+id+" does not exists"));
-        jobOfferValidator.accept(newJobOffer);
-        Optional<JobOffer> JobOfferHasReference = jobOfferRepository.findByReference(newJobOffer.getReference());
-        if(JobOfferHasReference.isPresent() && !Objects.equals(JobOfferHasReference.get().getReference(),JobOffer.getReference())){
-            throw new BadRequestException("Reference already taken");
-        }
-        Domain domain = domainRepository.findById(newJobOffer.getDomain().getIdDomain())
-                .orElseThrow(()->new ResourceNotFoundException("Domain with id "+id+" does not exists"));
-        JobOffer.setReference(newJobOffer.getReference());
-        JobOffer.setPost(newJobOffer.getPost());
-        JobOffer.setProfile(newJobOffer.getProfile());
-        JobOffer.setLocation(newJobOffer.getLocation());
-        JobOffer.setDescription(newJobOffer.getDescription());
-        JobOffer.setCompany(newJobOffer.getCompany());
-        JobOffer.setContract(newJobOffer.getContract());
-        JobOffer.setAvailable(newJobOffer.isAvailable());
-        JobOffer.setDomain(domain);
-
-        return JobOffer;
-    }
 
     //GET MAPPING all job offers
     public List<JobOffer> getJobOffers(int page, int pageSize, String reference, String post, String profile, String location, String description) {
@@ -109,5 +84,31 @@ public class JobOfferService {
         }
         jobOfferRepository.save(jobOffer);
         return jobOffer;
+    }
+
+
+    //PUT MAPPING
+    @Transactional
+    public JobOffer putModificationJobOfferById(Long id, JobOffer newJobOffer) {
+        JobOffer JobOffer = jobOfferRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("Job Offer with id "+id+" does not exists"));
+        jobOfferValidator.accept(newJobOffer);
+        Optional<JobOffer> JobOfferHasReference = jobOfferRepository.findByReference(newJobOffer.getReference());
+        if(JobOfferHasReference.isPresent() && !Objects.equals(JobOfferHasReference.get().getReference(),JobOffer.getReference())){
+            throw new BadRequestException("Reference already taken");
+        }
+        Domain domain = domainRepository.findById(newJobOffer.getDomain().getIdDomain())
+                .orElseThrow(()->new ResourceNotFoundException("Domain with id "+id+" does not exists"));
+        JobOffer.setReference(newJobOffer.getReference());
+        JobOffer.setPost(newJobOffer.getPost());
+        JobOffer.setProfile(newJobOffer.getProfile());
+        JobOffer.setLocation(newJobOffer.getLocation());
+        JobOffer.setDescription(newJobOffer.getDescription());
+        JobOffer.setCompany(newJobOffer.getCompany());
+        JobOffer.setContract(newJobOffer.getContract());
+        JobOffer.setAvailable(newJobOffer.isAvailable());
+        JobOffer.setDomain(domain);
+
+        return JobOffer;
     }
 }

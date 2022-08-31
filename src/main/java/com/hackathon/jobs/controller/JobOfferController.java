@@ -32,12 +32,6 @@ public class JobOfferController {
                                      @RequestParam(value = "description",required = false , defaultValue = "") String description){
         return jobOfferService.getJobOffers(page, pageSize, reference, post, profile, location, description);
     }
-
-    @PutMapping("/job-offers/{id}")
-    public JobOffer modifyJobOfferById(@PathVariable Long id, @Valid @RequestBody JobOffer newJobOffer) {
-        return jobOfferService.putModificationJobOfferById(id, newJobOffer);
-    }
-
     @GetMapping("/job-offers/{id}")
     public JobOffer getWorkerById(@PathVariable Long id) throws Exception {
         return jobOfferService.getJobOffersById(id);
@@ -57,5 +51,9 @@ public class JobOfferController {
     @PostMapping("/job-offers")
     public JobOffer postJobOffer(@Valid @RequestBody JobOffer jobOffer){
         return jobOfferService.postJobOffer(jobOffer);
+    }
+    @PutMapping("/job-offers/{id}")
+    public JobOffer modifyJobOfferById(@PathVariable Long id, @Valid @RequestBody JobOffer newJobOffer) {
+        return jobOfferService.putModificationJobOfferById(id, newJobOffer);
     }
 }
