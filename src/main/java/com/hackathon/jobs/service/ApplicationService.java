@@ -75,22 +75,22 @@ public class ApplicationService {
         Application application = applicationRepository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException("the application in "+id+" not found"));
 
-        if(!Objects.equals(application.getDateApplication(), applicationToUpdate.getDateApplication())){
+        if(applicationToUpdate.getDateApplication() != null){
             application.setDateApplication(applicationToUpdate.getDateApplication());
         }
-        if(!Objects.equals(application.getEmail(), applicationToUpdate.getEmail())){
+        if(applicationToUpdate.getEmail() != null){
             application.setEmail(applicationToUpdate.getEmail());
         }
-        if(!Objects.equals(application.getCandidateName(), applicationToUpdate.getCandidateName())){
+        if(applicationToUpdate.getCandidateName() != null){
             application.setCandidateName(applicationToUpdate.getCandidateName());
         }
-        if(!Objects.equals(application.getProfile(), applicationToUpdate.getProfile())){
+        if(applicationToUpdate.getProfile() != null){
             application.setProfile(applicationToUpdate.getProfile());
         }
-        if(!Objects.equals(application.getSalary(), applicationToUpdate.getSalary())){
+        if(applicationToUpdate.getSalary() != null){
             application.setSalary(applicationToUpdate.getSalary());
         }
-        if(!Objects.equals(application.getJobOffer().getIdJobOffer(), applicationToUpdate.getJobOffer().getIdJobOffer())){
+        if(applicationToUpdate.getJobOffer() != null){
             JobOffer newJobOffer = jobOfferRepository.findById(applicationToUpdate.getJobOffer().getIdJobOffer())
                     .orElseThrow(()->new ResourceNotFoundException("the jobOffer in "+applicationToUpdate.getJobOffer().getIdJobOffer()+"is not found"));
             application.setJobOffer(newJobOffer);
