@@ -52,7 +52,6 @@ public class JobOffer implements Serializable {
     private String company;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Contract is mandatory")
     private JobOffer.Contract contract;
 
     @ManyToOne
