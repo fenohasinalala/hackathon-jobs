@@ -95,6 +95,7 @@ public class ApplicationService {
                     .orElseThrow(()->new ResourceNotFoundException("the jobOffer in "+applicationToUpdate.getJobOffer().getIdJobOffer()+"is not found"));
             application.setJobOffer(newJobOffer);
         }
+        applicationRepository.save(application);
         return application;
     }
 }
