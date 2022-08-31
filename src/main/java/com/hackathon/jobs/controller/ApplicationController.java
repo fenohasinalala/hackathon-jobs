@@ -18,10 +18,10 @@ public class ApplicationController {
     public List<Application> getAllApplication(
             @RequestParam(name = "page")int page,
             @RequestParam(name = "page_size")int pageSize,
-            @RequestParam(name = "candidate_name")String candidateName,
-            @RequestParam(name = "email")String email,
-            @RequestParam(name = "profile")String profile,
-            @RequestParam(name = "salary")Double salary
+            @RequestParam(name = "candidate_name", required = false)String candidateName,
+            @RequestParam(name = "email", required = false)String email,
+            @RequestParam(name = "profile", required = false)String profile,
+            @RequestParam(name = "salary", required = false)Double salary
     ){
         return applicationService.getAllApplications(page, pageSize, candidateName, email, profile, salary);
     }
