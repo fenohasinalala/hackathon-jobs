@@ -1,5 +1,6 @@
 package com.hackathon.jobs.controller;
 
+import com.hackathon.jobs.model.Application;
 import com.hackathon.jobs.model.JobOffer;
 import com.hackathon.jobs.service.JobOfferService;
 import lombok.AllArgsConstructor;
@@ -34,13 +35,17 @@ public class JobOfferController {
     public JobOffer getWorkerById(@PathVariable Long id) throws Exception {
         return jobOfferService.getJobOffersById(id);
     }
-    @GetMapping("/job-offers/count")
-    public int getJobOfferCount() {
-        return jobOfferService.getJobOfferCount();
+    @GetMapping("/domains/{id_domain}/job-offers")
+    public List<JobOffer> getJobOfferByDomainId(@PathVariable(name = "id_domain")Long idDomain){
+        return jobOfferService.getJobOfferByIdDomain(idDomain);
     }
     @GetMapping("/domains/{id_domain}/job-offers/count")
     public int getJobOfferCountByDomain(@PathVariable(name = "id_domain")Long idDomain){
         return jobOfferService.getJobOfferCountByDomainId(idDomain);
+    }
+    @GetMapping("/job-offers/count")
+    public int getJobOfferCount() {
+        return jobOfferService.getJobOfferCount();
     }
     @PostMapping("/job-offers")
     public JobOffer postJobOffer(@Valid @RequestBody JobOffer jobOffer){
