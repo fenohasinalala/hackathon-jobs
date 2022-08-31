@@ -24,5 +24,6 @@ public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     Optional<JobOffer> findByDomainIdDomain(Long idDomain);
 
      */
+    Optional<JobOffer> findByAvailable(Boolean available);
 
 }
