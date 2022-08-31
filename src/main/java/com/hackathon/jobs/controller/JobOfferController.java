@@ -1,6 +1,5 @@
 package com.hackathon.jobs.controller;
 
-import com.hackathon.jobs.model.Application;
 import com.hackathon.jobs.model.JobOffer;
 import com.hackathon.jobs.service.JobOfferService;
 import lombok.AllArgsConstructor;

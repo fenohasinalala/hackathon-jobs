@@ -100,6 +100,7 @@ public class ApplicationService {
         return application;
     }
 
+    //GET MAPPING APPLICATION BY DOMAIN ID
     public List<Application> getApplicationByIdDomain(Long idDomain){
         List<Application> allApplications = applicationRepository.findAll();
         List<Application> applicationByDomain = new ArrayList<>();
@@ -111,10 +112,12 @@ public class ApplicationService {
         return applicationByDomain;
     }
 
+    //GET MAPPING APPLICATION COUNT BY DOMAIN ID
     public int getApplicationCountByDomain(Long idDomain){
         return this.getApplicationByIdDomain(idDomain).size();
     }
 
+    //GET MAPPING APPLICATION COUNT
     public int getApplicationCount(){
         return applicationRepository.findAll().size();
     }
