@@ -38,6 +38,10 @@ public class JobOfferController {
     public int getJobOfferCount() {
         return jobOfferService.getJobOfferCount();
     }
+    @GetMapping("/domains/{id_domain}/job-offers/count")
+    public int getJobOfferCountByDomain(@PathVariable(name = "id_domain")Long idDomain){
+        return jobOfferService.getJobOfferCountByDomainId(idDomain);
+    }
     @PostMapping("/job-offers")
     public JobOffer postJobOffer(@Valid @RequestBody JobOffer jobOffer){
         return jobOfferService.postJobOffer(jobOffer);

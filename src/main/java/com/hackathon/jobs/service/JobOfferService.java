@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,10 +48,26 @@ public class JobOfferService {
         return jobOfferRepository.findAll().size();
     }
 
+    //GET MAPPING DOMAIN JOB OFFERS COUNTS
+    public List<JobOffer> getJobOfferByIdDomain(Long idDomain){
+        List<JobOffer> allJobOffers = jobOfferRepository.findAll();
+        List<JobOffer> jobOffersByDomain = new ArrayList<>();
+        for(JobOffer jobOffer : allJobOffers){
+            if(jobOffer.getDomain().getIdDomain() == idDomain){
+                jobOffersByDomain.add(jobOffer);
+            }
+        }
+        return jobOffersByDomain;
+    }
+    public int getJobOfferCountByDomainId(Long idDomain){
+        return this.getJobOfferByIdDomain(idDomain).size();
+    }
+
     //POST MAPPING
     public JobOffer postJobOffer(JobOffer jobOffer) {
         jobOfferValidator.accept(jobOffer);
         Optional<JobOffer> jobOfferByReference = jobOfferRepository.findByReferenceIgnoreCase(jobOffer.getReference());
+//        Optional<JobOffer> jobOfferByAvailable = jobOfferRepository.findByAvailable(jobOffer.isAvailable());
 
         if (jobOfferByReference.isPresent()){
             throw new BadRequestException("Reference is already existed");
