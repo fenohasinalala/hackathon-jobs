@@ -1,10 +1,12 @@
 package com.hackathon.jobs.model;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,14 +15,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
+@Table
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class JobOffer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +42,13 @@ public class JobOffer implements Serializable {
 
     private String location;
 
+    @Column(columnDefinition = "varchar(100) default 'Aucune description'")
     private String description;
 
+    @Column(columnDefinition = "boolean default true")
     private boolean available;
 
+    @Column(columnDefinition = "varchar(100) default 'Anonyme'")
     private String company;
 
     @Enumerated(EnumType.STRING)
