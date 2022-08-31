@@ -3,6 +3,7 @@ package com.hackathon.jobs.service;
 import com.hackathon.jobs.exception.BadRequestException;
 import com.hackathon.jobs.model.Application;
 import com.hackathon.jobs.model.JobOffer;
+import com.hackathon.jobs.model.validation.ApplicationValidator;
 import com.hackathon.jobs.repository.ApplicationRepository;
 import com.hackathon.jobs.repository.JobOfferRepository;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,8 @@ import java.util.Optional;
 public class ApplicationService {
     private ApplicationRepository applicationRepository;
     private JobOfferRepository jobOfferRepository;
+
+    ApplicationValidator applicationValidator;
 
     //GET MAPPING
     public List<Application> getAllApplications(int page, int pageSize, String candidateName, String email, String profile, Double salary){
