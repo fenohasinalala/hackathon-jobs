@@ -3,16 +3,12 @@ package com.hackathon.jobs.controller;
 import com.hackathon.jobs.model.Application;
 import com.hackathon.jobs.service.ApplicationService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 public class ApplicationController {
@@ -36,7 +32,15 @@ public class ApplicationController {
     }
 
     @PostMapping("/applications")
-    public Application insertApplication(@RequestBody Application newApplication) throws SQLException {
+    public Application insertApplication(@RequestBody Application newApplication) {
         return applicationService.insertApplication(newApplication);
+    }
+
+    @PutMapping("/applications/{id}")
+    public Application putUpdateApllication(
+            @PathVariable(name = "id")Long id,
+            @RequestBody Application newApplication
+    ){
+        return applicationService.putUpdateApplication(id, newApplication);
     }
 }
