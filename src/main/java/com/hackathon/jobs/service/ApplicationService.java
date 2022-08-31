@@ -12,9 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -55,16 +54,10 @@ public class ApplicationService {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //POST MAPPING
-    public Application insertApplication(Application applicationParameter) throws SQLException {
+    public Application insertApplication(Application applicationParameter) {
         Application newApplication = new Application();
-        JobOffer jobOffer;
-        Optional<JobOffer> jobOfferOptional = jobOfferRepository.findById(applicationParameter.getJobOffer().getIdJobOffer());
-
-        if(jobOfferOptional.isPresent()){
-            jobOffer = jobOfferOptional.get();
-        }else {
-            throw new SQLException("job-offer not found");
-        }
+        JobOffer jobOffer = jobOfferRepository.findById(applicationParameter.getJobOffer().getIdJobOffer())
+            .orElseThrow(()->new ResourceNotFoundException("the job-offer on "+applicationParameter.getJobOffer().getIdJobOffer()));
 
         newApplication.setCandidateName(applicationParameter.getCandidateName());
         newApplication.setDateApplication(applicationParameter.getDateApplication());
@@ -78,7 +71,30 @@ public class ApplicationService {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //PUT MAPPING
-    public Application putUpdateApplication(Application applicationToUpdate){
+    public Application putUpdateApplication(Long id, Application applicationToUpdate){
+        Application application = applicationRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("the application in "+id+" not found"));
 
+        if(!Objects.equals(application.getDateApplication(), applicationToUpdate.getDateApplication())){
+            application.setDateApplication(applicationToUpdate.getDateApplication());
+        }
+        if(!Objects.equals(application.getEmail(), applicationToUpdate.getEmail())){
+            application.setEmail(applicationToUpdate.getEmail());
+        }
+        if(!Objects.equals(application.getCandidateName(), applicationToUpdate.getCandidateName())){
+            application.setCandidateName(applicationToUpdate.getCandidateName());
+        }
+        if(!Objects.equals(application.getProfile(), applicationToUpdate.getProfile())){
+            application.setProfile(applicationToUpdate.getProfile());
+        }
+        if(!Objects.equals(application.getSalary(), applicationToUpdate.getSalary())){
+            application.setSalary(applicationToUpdate.getSalary());
+        }
+        if(!Objects.equals(application.getJobOffer().getIdJobOffer(), applicationToUpdate.getJobOffer().getIdJobOffer())){
+            JobOffer newJobOffer = jobOfferRepository.findById(applicationToUpdate.getJobOffer().getIdJobOffer())
+                    .orElseThrow(()->new ResourceNotFoundException("the jobOffer in "+applicationToUpdate.getJobOffer().getIdJobOffer()+"is not found"));
+            application.setJobOffer(newJobOffer);
+        }
+        return application;
     }
 }
