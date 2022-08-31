@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -60,5 +61,9 @@ public class ApplicationController {
             @RequestBody Application newApplication
     ){
         return applicationService.putUpdateApplication(id, newApplication);
+    }
+    @GetMapping("/domain-applied")
+    public HashMap<Integer, Integer> getDomainMostApplied(){
+        return applicationService.getDomainMostApplied();
     }
 }
