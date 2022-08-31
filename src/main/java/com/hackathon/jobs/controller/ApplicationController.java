@@ -31,6 +31,11 @@ public class ApplicationController {
         return applicationService.getApplicationById(id);
     }
 
+    @GetMapping("/domains/{id_domain}/applications")
+    public List<Application> getApplicationByDomain(@PathVariable(name = "id_domain")Long idDomain){
+        return applicationService.getApplicationByIdDomain(idDomain);
+    }
+
     @PostMapping("/applications")
     public Application insertApplication(@RequestBody Application newApplication) {
         return applicationService.insertApplication(newApplication);
