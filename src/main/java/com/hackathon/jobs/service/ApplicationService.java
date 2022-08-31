@@ -46,13 +46,13 @@ public class ApplicationService {
     }
 
     //GET BY ID
-    public Application getApplicationById(Long id) throws SQLException {
+    public Application getApplicationById(Long id) {
         Application applicationById;
         Optional<Application> applicationOptional = applicationRepository.findById(id);
         if(applicationOptional.isPresent()){
             applicationById = applicationOptional.get();
         }else {
-            throw new SQLException("application not found");
+            throw new NullPointerException("application not found");
         }
         return applicationById;
     }
