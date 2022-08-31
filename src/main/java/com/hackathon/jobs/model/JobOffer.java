@@ -42,13 +42,13 @@ public class JobOffer implements Serializable {
 
     private String location;
 
-    @Column(columnDefinition = "varchar(100) default 'Aucune description'")
+    //@Column(columnDefinition = "varchar(10000) default 'Aucune description'")
     private String description;
 
-    @Column(columnDefinition = "boolean default true")
+    //@Column(columnDefinition = "boolean default true")
     private boolean available;
 
-    @Column(columnDefinition = "varchar(100) default 'Anonyme'")
+    //@Column(columnDefinition = "varchar(100) default 'Anonyme'")
     private String company;
 
     @Enumerated(EnumType.STRING)
