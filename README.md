@@ -1,11 +1,11 @@
 # hackaton-jobs
 
-# Model
+# DATABASE SCHEMA
 <p align="left">
   <img src="https://github.com/Herizoran/hackathon-jobs/blob/main/img/jobOffer_mcd.jpg" />
 </p>
 
-# Model MLD
+# DATABASE SCHEMA MLD
 <p align="left">
   <img src="https://github.com/Herizoran/hackathon-jobs/blob/main/img/jobOffer_mld.jpg" />
 </p>
