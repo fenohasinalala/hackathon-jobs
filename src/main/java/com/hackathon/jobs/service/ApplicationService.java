@@ -13,8 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -120,5 +123,53 @@ public class ApplicationService {
     //GET MAPPING APPLICATION COUNT
     public int getApplicationCount(){
         return applicationRepository.findAll().size();
+    }
+    //GET MAPPING APPLICATION BY JOB OFFER ID
+    public List<Application> getApplicationByJobOfferId(Long idJob){
+        List<Application> allApplications = applicationRepository.findAll();
+        List<Application> applicationByJobOffer = new ArrayList<>();
+        for(Application application : allApplications){
+            if(application.getJobOffer().getIdJobOffer() == idJob){
+                applicationByJobOffer.add(application);
+            }
+        }
+        return applicationByJobOffer;
+    }
+
+    //GET MAPPING APPLICATION BY JOB OFFER COUNT
+    public int getApplicationByJobOfferCount(Long idJob){
+        return this.getApplicationByJobOfferId(idJob).size();
+    }
+
+    //GET THE DOMAIN MOST APPLIED FOR
+    public HashMap<Integer, Integer> getDomainMostApplied(){
+        List<Application> allApplications = applicationRepository.findAll();
+        HashMap<Integer,Integer> domainCount = new HashMap<>();
+        for(Application application : allApplications){
+            int key = Math.toIntExact(application.getJobOffer().getDomain().getIdDomain());
+            if (domainCount.containsKey(key)){
+                domainCount.put(key,
+                        domainCount.get(key)+1);
+            }else{
+                domainCount.put(key, 1);
+            }
+        }
+        return sortByValue(domainCount);
+    }
+
+    //SORT VALUES OF HASHMAP
+    public HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> mapEntry)
+    {
+        HashMap<Integer, Integer> temp
+                = mapEntry.entrySet()
+                .stream()
+                .sorted((i2,i1)
+                        -> i1.getValue().compareTo(
+                        i2.getValue()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1, LinkedHashMap::new));
+        return temp;
     }
 }
