@@ -25,7 +25,7 @@ public class WorkerService {
     private WorkerRepository workerRepository;
 
     WorkerValidator workerValidator;
-    private PostService postService;
+//    private PostService postService;
 
     public List<Worker> getWorkers(int page, int pageSize, String firstName, String lastName) {
         if(page<1){
@@ -107,9 +107,9 @@ public class WorkerService {
         if(!Objects.equals(newWorker.getAddress(),worker.getAddress())){
             worker.setAddress(newWorker.getAddress());
         }
-        if(!Objects.equals(newWorker.getPost().getId(),worker.getPost().getId())){
-            worker.setPost(postService.getPostById(newWorker.getPost().getId()));
-        }
+//        if(!Objects.equals(newWorker.getPost().getId(),worker.getPost().getId())){
+//            worker.setPost(postService.getPostById(newWorker.getPost().getId()));
+//        }
         return worker;
     }
 }

@@ -20,7 +20,7 @@ public class WorkerMapper {
         restWorker.setLeaveGet(worker.getleaveGet());
         restWorker.setLeaveTaken(worker.getLeaveTaken());
         restWorker.setLeaveRemained(worker.getLeaveRemained());
-        restWorker.setPost(worker.getPost());
+//        restWorker.setPost(worker.getPost());
         return restWorker;
     }
 }

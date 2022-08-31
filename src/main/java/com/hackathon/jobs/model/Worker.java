@@ -67,9 +67,13 @@ public class Worker {
     @NotBlank(message = "Address is mandatory")
     private String address;
 
+    /*
+
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
+
+     */
 
     @Transient
     private Double leaveGet;
