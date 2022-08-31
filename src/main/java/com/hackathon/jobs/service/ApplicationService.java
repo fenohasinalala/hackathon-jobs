@@ -110,4 +110,12 @@ public class ApplicationService {
         }
         return applicationByDomain;
     }
+
+    public int getApplicationCountByDomain(Long idDomain){
+        return this.getApplicationByIdDomain(idDomain).size();
+    }
+
+    public int getApplicationCount(){
+        return applicationRepository.findAll().size();
+    }
 }
