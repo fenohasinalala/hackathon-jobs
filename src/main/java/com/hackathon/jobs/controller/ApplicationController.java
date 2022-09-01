@@ -69,10 +69,22 @@ public class ApplicationController {
     public Domain getDomainMostApplied(){
         return applicationService.getDomainMostApplied();
     }
+    /*
     @GetMapping("/job-offers/{id_job}/applications")
     public List<Application> getApplicationsByJobId(@PathVariable(name = "id_job")Long idJob){
         return applicationService.getApplicationByJobOfferId(idJob);
     }
+
+     */
+
+    @GetMapping("/job-offers/{id_job}/applications")
+    public List<Application> getApplicationsByJobId(@PathVariable(name = "id_job")Long idJob,
+                                                    @RequestParam(name = "page", required = false)int page,
+                                                    @RequestParam(name = "page_size", required = false)int pageSize
+    ){
+        return applicationService.getAllApplicationsByJobOfferIdPageable(idJob,page,pageSize);
+    }
+
     @GetMapping("/job-offers/{id_job}/applications/count")
     public int getApplicationCountByJobs(@PathVariable(name = "id_job")Long idJob){
         return applicationService.getApplicationByJobOfferCount(idJob);
