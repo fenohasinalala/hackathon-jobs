@@ -1,17 +1,17 @@
 insert into domain (name)
 	values
-('GENIE CIVIL'),
-('COMPTABILITE'),
-('CINEMATOGRAPHIE'),
-('ARCHITECTURE'),
-('TOPOGRAPHIE'),
-('OFFSHORE'),
-('TECHNOLOGIE'),
-('SANTE'),
-('GENIE INDUSTRIEL'),
-('MANAGEMENT'),
-('EDUCATION'),
-('INFORMATIQUE');
+('genie civil'),
+('comptabilite'),
+('cinematographie'),
+('architecture'),
+('topographie'),
+('offshore'),
+('technologie'),
+('sante'),
+('genie indistruel'),
+('management'),
+('education'),
+('informatique');
 
 insert into job_offer (reference, post, profile, location, description, available, company, contract, id_domain)
 	values
