@@ -69,6 +69,11 @@ public class ApplicationController {
     public Domain getDomainMostApplied(){
         return applicationService.getDomainMostApplied();
     }
+    @GetMapping("/domains-applied/count")
+    public int getDomainMostAppliedCount(){
+        return applicationService.getDomainMostAppliedCount();
+    }
+
     /*
     @GetMapping("/job-offers/{id_job}/applications")
     public List<Application> getApplicationsByJobId(@PathVariable(name = "id_job")Long idJob){

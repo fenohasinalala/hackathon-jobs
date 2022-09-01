@@ -151,6 +151,14 @@ public class ApplicationService {
 
     //GET THE DOMAIN MOST APPLIED FOR
     public Domain getDomainMostApplied(){
+        return domainService.getDomainById((long) getKeyAndValueOfMostApplied().get(0));
+    }
+    public int getDomainMostAppliedCount(){
+        return getKeyAndValueOfMostApplied().get(1);
+    }
+
+    //FILTER VALUES
+    public List<Integer> getKeyAndValueOfMostApplied(){
         List<Application> allApplications = applicationRepository.findAll();
         HashMap<Integer,Integer> domainCount = new HashMap<>();
         for(Application application : allApplications){
@@ -164,7 +172,11 @@ public class ApplicationService {
         }
         //get the most applied by sorting the domain by its value
         int domainKey = sortByValue(domainCount).entrySet().iterator().next().getKey();
-        return domainService.getDomainById((long) domainKey);
+        int domainValue = sortByValue(domainCount).entrySet().iterator().next().getValue();
+        List<Integer> object = new ArrayList<>();
+        object.add(domainKey);
+        object.add(domainValue);
+        return object;
     }
 
     //SORT VALUES OF HASHMAP
