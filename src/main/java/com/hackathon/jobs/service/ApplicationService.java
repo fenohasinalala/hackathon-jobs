@@ -9,6 +9,7 @@ import com.hackathon.jobs.model.validation.ApplicationValidator;
 import com.hackathon.jobs.repository.ApplicationRepository;
 import com.hackathon.jobs.repository.JobOfferRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -138,6 +139,33 @@ public class ApplicationService {
         return applicationByJobOffer;
     }
 
+    public List<Application> getAllApplicationsByJobOfferIdPageable(Long idJobOffer, int page, int pageSize){
+        Pageable pageable = PageRequest.of(page-1, pageSize);
+        return applicationRepository.findByJobOfferIdJobOffer(idJobOffer, pageable);
+    }
+    /*
+    public List<Application> getApplicationByJobOfferIdPageable(Long idJob, int page, int pageSize){
+        List<Application> allApplications = applicationRepository.findAll();
+        List<Application> applicationByJobOffer = new ArrayList<>();
+        for(Application application : allApplications){
+            if(application.getJobOffer().getIdJobOffer() == idJob){
+                applicationByJobOffer.add(application);
+            }
+        }
+        if(page<= 0){
+            throw new BadRequestException("page must be >= 1");
+        }
+        if(pageSize > 200){
+            throw new BadRequestException("page_size is so large");
+        }
+        Pageable pageable = PageRequest.of(page-1, pageSize);
+
+        return applicationByJobOffer;
+    }
+
+     */
+
+
     //GET MAPPING APPLICATION BY JOB OFFER COUNT
     public int getApplicationByJobOfferCount(Long idJob){
         return this.getApplicationByJobOfferId(idJob).size();
@@ -156,7 +184,7 @@ public class ApplicationService {
                 domainCount.put(key, 1);
             }
         }
-        //get the most applied by sorting the domoain by its value
+        //get the most applied by sorting the domain by its value
         int domainKey = sortByValue(domainCount).entrySet().iterator().next().getKey();
         return domainService.getDomainById((long) domainKey);
     }
