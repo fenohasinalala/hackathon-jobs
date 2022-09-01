@@ -3,6 +3,7 @@ package com.hackathon.jobs.service;
 import com.hackathon.jobs.exception.BadRequestException;
 import com.hackathon.jobs.exception.ResourceNotFoundException;
 import com.hackathon.jobs.model.Application;
+import com.hackathon.jobs.model.Domain;
 import com.hackathon.jobs.model.JobOffer;
 import com.hackathon.jobs.model.validation.ApplicationValidator;
 import com.hackathon.jobs.repository.ApplicationRepository;
@@ -26,6 +27,7 @@ public class ApplicationService {
     private JobOfferRepository jobOfferRepository;
 
     ApplicationValidator applicationValidator;
+    DomainService domainService;
 
     //GET MAPPING
     public List<Application> getAllApplications(int page, int pageSize, String candidateName, String email, String profile, Double salary){
@@ -142,7 +144,7 @@ public class ApplicationService {
     }
 
     //GET THE DOMAIN MOST APPLIED FOR
-    public HashMap<Integer, Integer> getDomainMostApplied(){
+    public Domain getDomainMostApplied(){
         List<Application> allApplications = applicationRepository.findAll();
         HashMap<Integer,Integer> domainCount = new HashMap<>();
         for(Application application : allApplications){
@@ -154,7 +156,9 @@ public class ApplicationService {
                 domainCount.put(key, 1);
             }
         }
-        return sortByValue(domainCount);
+        //get the most applied by sorting the domoain by its value
+        int domainKey = sortByValue(domainCount).entrySet().iterator().next().getKey();
+        return domainService.getDomainById((long) domainKey);
     }
 
     //SORT VALUES OF HASHMAP

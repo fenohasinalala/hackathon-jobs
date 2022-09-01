@@ -1,12 +1,12 @@
 package com.hackathon.jobs.controller;
 
 import com.hackathon.jobs.model.Application;
+import com.hackathon.jobs.model.Domain;
 import com.hackathon.jobs.service.ApplicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -63,7 +63,7 @@ public class ApplicationController {
         return applicationService.putUpdateApplication(id, newApplication);
     }
     @GetMapping("/domain-applied")
-    public HashMap<Integer, Integer> getDomainMostApplied(){
+    public Domain getDomainMostApplied(){
         return applicationService.getDomainMostApplied();
     }
 }
