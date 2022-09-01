@@ -143,28 +143,6 @@ public class ApplicationService {
         Pageable pageable = PageRequest.of(page-1, pageSize);
         return applicationRepository.findByJobOfferIdJobOffer(idJobOffer, pageable);
     }
-    /*
-    public List<Application> getApplicationByJobOfferIdPageable(Long idJob, int page, int pageSize){
-        List<Application> allApplications = applicationRepository.findAll();
-        List<Application> applicationByJobOffer = new ArrayList<>();
-        for(Application application : allApplications){
-            if(application.getJobOffer().getIdJobOffer() == idJob){
-                applicationByJobOffer.add(application);
-            }
-        }
-        if(page<= 0){
-            throw new BadRequestException("page must be >= 1");
-        }
-        if(pageSize > 200){
-            throw new BadRequestException("page_size is so large");
-        }
-        Pageable pageable = PageRequest.of(page-1, pageSize);
-
-        return applicationByJobOffer;
-    }
-
-     */
-
 
     //GET MAPPING APPLICATION BY JOB OFFER COUNT
     public int getApplicationByJobOfferCount(Long idJob){
