@@ -62,8 +62,19 @@ public class ApplicationController {
     ){
         return applicationService.putUpdateApplication(id, newApplication);
     }
-    @GetMapping("/domain-applied")
+
+
+    //GET MAPPING FEATURES
+    @GetMapping("/domains-applied")
     public Domain getDomainMostApplied(){
         return applicationService.getDomainMostApplied();
+    }
+    @GetMapping("/job-offers/{id_job}/applications")
+    public List<Application> getApplicationsByJobId(@PathVariable(name = "id_job")Long idJob){
+        return applicationService.getApplicationByJobOfferId(idJob);
+    }
+    @GetMapping("/job-offers/{id_job}/applications/count")
+    public int getApplicationCountByJobs(@PathVariable(name = "id_job")Long idJob){
+        return applicationService.getApplicationByJobOfferCount(idJob);
     }
 }
