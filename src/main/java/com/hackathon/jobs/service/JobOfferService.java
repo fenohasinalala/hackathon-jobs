@@ -5,7 +5,6 @@ import com.hackathon.jobs.exception.ResourceNotFoundException;
 
 import com.hackathon.jobs.model.Domain;
 import com.hackathon.jobs.model.JobOffer;
-import com.hackathon.jobs.model.Worker;
 import com.hackathon.jobs.model.validation.JobOfferValidator;
 import com.hackathon.jobs.repository.DomainRepository;
 import com.hackathon.jobs.repository.JobOfferRepository;
