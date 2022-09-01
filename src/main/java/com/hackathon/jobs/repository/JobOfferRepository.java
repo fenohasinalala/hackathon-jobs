@@ -22,6 +22,8 @@ public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     Optional<JobOffer> findByReference(String reference);
     Optional<JobOffer> findByReferenceIgnoreCase(String reference);
 
+    List<JobOffer> findByDomainIdDomain(Long idDomain, Pageable pageable);
+
     /*
     Optional<JobOffer> findByPostIgnoreCase(String post);
     Optional<JobOffer> findByProfileIgnoreCase(String profile);

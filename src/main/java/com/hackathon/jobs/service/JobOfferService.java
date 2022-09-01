@@ -9,6 +9,7 @@ import com.hackathon.jobs.model.validation.JobOfferValidator;
 import com.hackathon.jobs.repository.DomainRepository;
 import com.hackathon.jobs.repository.JobOfferRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -68,6 +69,16 @@ public class JobOfferService {
         }
         return jobOffersByDomain;
     }
+
+    public List<JobOffer> getJobOfferByDomainIdDomain(Long idDomain, int page, int pageSize){
+        if(page < 1){
+            throw new BadRequestException("your page is not valid");
+        }else {
+            Pageable pageable = PageRequest.of(page-1, pageSize);
+            return jobOfferRepository.findByDomainIdDomain(idDomain, pageable);
+        }
+    }
+
     public int getJobOfferCountByDomainId(Long idDomain){
         return this.getJobOfferByIdDomain(idDomain).size();
     }

@@ -37,8 +37,12 @@ public class JobOfferController {
         return jobOfferService.getJobOffersById(id);
     }
     @GetMapping("/domains/{id_domain}/job-offers")
-    public List<JobOffer> getJobOfferByDomainId(@PathVariable(name = "id_domain")Long idDomain){
-        return jobOfferService.getJobOfferByIdDomain(idDomain);
+    public List<JobOffer> getJobOfferByDomainId(
+            @PathVariable(name = "id_domain")Long idDomain,
+            @RequestParam(name = "page")int page,
+            @RequestParam(name = "page_size")int pageSize
+    ){
+        return jobOfferService.getJobOfferByDomainIdDomain(idDomain, page, pageSize);
     }
     @GetMapping("/domains/{id_domain}/job-offers/count")
     public int getJobOfferCountByDomain(@PathVariable(name = "id_domain")Long idDomain){
