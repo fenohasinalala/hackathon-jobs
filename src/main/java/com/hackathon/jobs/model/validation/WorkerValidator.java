@@ -1,7 +1,6 @@
 package com.hackathon.jobs.model.validation;
 
 import com.hackathon.jobs.exception.BadRequestException;
-import com.hackathon.jobs.model.Worker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
