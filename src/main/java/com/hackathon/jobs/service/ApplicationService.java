@@ -179,6 +179,15 @@ public class ApplicationService {
         return object;
     }
 
+    public List<Application> getAllApplicationByDomainIdDomain(Long idDomain, int page, int pageSize){
+        if(page < 1){
+            throw  new BadRequestException("your page is not valid");
+        }else{
+            Pageable pageable = PageRequest.of(page-1, pageSize);
+            return applicationRepository.findByJobOffer_DomainIdDomain(idDomain, pageable);
+        }
+    }
+
     //SORT VALUES OF HASHMAP
     public HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> mapEntry)
     {

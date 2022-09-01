@@ -34,8 +34,12 @@ public class ApplicationController {
     }
 
     @GetMapping("/domains/{id_domain}/applications")
-    public List<Application> getApplicationByDomain(@PathVariable(name = "id_domain")Long idDomain){
-        return applicationService.getApplicationByIdDomain(idDomain);
+    public List<Application> getApplicationByDomain(
+            @PathVariable(name = "id_domain")Long idDomain,
+            @RequestParam(name = "page")int page,
+            @RequestParam(name = "page_size")int pageSize
+            ){
+        return applicationService.getAllApplicationByDomainIdDomain(idDomain, page, pageSize);
     }
 
     @GetMapping("/applications/count")

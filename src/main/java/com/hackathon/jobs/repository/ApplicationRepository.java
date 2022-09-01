@@ -16,4 +16,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
     List<Application>findBySalary(Double salary, Pageable pageable);
 
     List<Application> findByJobOfferIdJobOffer(Long id, Pageable pageable);
+    List<Application> findByJobOffer_DomainIdDomain(Long idDomain, Pageable pageable);
 }
